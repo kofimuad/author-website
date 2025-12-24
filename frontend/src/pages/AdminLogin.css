@@ -10,7 +10,7 @@
 
 .login-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
@@ -19,41 +19,45 @@
 
 .login-card {
   background-color: var(--bg-white);
-  border-radius: 16px;
-  padding: 2.5rem;
+  border-radius: 6px;
+  padding: 2rem;
   box-shadow: var(--shadow-lg);
   animation: slideInLeft 0.6s ease;
 }
 
 .login-header h1 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
 }
 
 .login-subtitle {
+  font-family: 'Poppins', sans-serif;
   color: var(--text-light);
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
 .login-card form {
-  margin: 1.5rem 0;
+  margin: 1.2rem 0;
 }
 
 .security-notice {
   background-color: #FFF3CD;
   color: #856404;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  border-left: 4px solid #FFC107;
-  font-size: 0.9rem;
+  padding: 0.8rem;
+  border-radius: 4px;
+  margin-bottom: 1.2rem;
+  border-left: 3px solid #FFC107;
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 .login-toggle {
   text-align: center;
   margin-top: 1rem;
   color: var(--text-light);
+  font-size: 0.85rem;
 }
 
 .toggle-button {
@@ -63,8 +67,10 @@
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
-  margin-left: 0.5rem;
+  margin-left: 0.4rem;
   transition: color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
 }
 
 .toggle-button:hover {
@@ -72,12 +78,12 @@
 }
 
 .login-info {
-  animation: slideInLeft 0.6s ease 0.2s backwards;
+  animation: slideInLeft 0.6s ease 0.1s backwards;
 }
 
 .login-info h3 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
 }
 
 .login-info ul {
@@ -86,13 +92,15 @@
 }
 
 .login-info li {
-  padding: 0.75rem 0;
+  padding: 0.5rem 0;
   color: var(--text-light);
+  font-size: 0.85rem;
+  line-height: 1.6;
   transition: all 0.3s ease;
 }
 
 .login-info li:hover {
-  transform: translateX(8px);
+  transform: translateX(6px);
   color: var(--text-dark);
 }
 
