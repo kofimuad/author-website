@@ -1,23 +1,28 @@
+// ============================================
+// File: frontend/src/pages/HomePage.jsx
+// Fixed with /publications route
+// ============================================
+
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { booksAPI, storiesAPI, btsAPI } from '../utils/api'
+import { booksAPI, publicationsAPI, btsAPI } from '../utils/api'
 import './HomePage.css'
 
 function HomePage() {
-  const [featured, setFeatured] = useState({ books: [], stories: [], posts: [] })
+  const [featured, setFeatured] = useState({ books: [], publications: [], posts: [] })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
-        const [books, stories, posts] = await Promise.all([
+        const [books, publications, posts] = await Promise.all([
           booksAPI.getAll(),
-          storiesAPI.getAll(),
+          publicationsAPI.getAll(),
           btsAPI.getAll(),
         ])
         setFeatured({
           books: books.slice(0, 3),
-          stories: stories.slice(0, 2),
+          publications: publications.slice(0, 2),
           posts: posts.slice(0, 1),
         })
       } catch (error) {
@@ -42,7 +47,7 @@ function HomePage() {
           <p className="subtitle">Discover stories, insights, and the creative journey</p>
           <div className="hero-buttons">
             <Link to="/books" className="btn btn-primary">Explore Books</Link>
-            <Link to="/publications" className="btn btn-secondary">Other Publications</Link>
+            <Link to="/other-publications" className="btn btn-secondary">Read Publications</Link>
           </div>
         </div>
       </section>
@@ -71,27 +76,27 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Featured Stories */}
+      {/* Featured Publications */}
       <section className="featured-section">
         <div className="container">
           <h2>Latest Publications</h2>
           <div className="grid grid-2">
-            {featured.stories.map((story) => (
-              <div key={story._id} className="card">
-                {story.thumbnailImage && (
-                  <img src={story.thumbnailImage} alt={story.title} className="card-image" />
+            {featured.publications.map((publication) => (
+              <div key={publication._id} className="card">
+                {publication.thumbnailImage && (
+                  <img src={publication.thumbnailImage} alt={publication.title} className="card-image" />
                 )}
-                <h3>{story.title}</h3>
-                <p>{story.excerpt || story.content?.substring(0, 100)}...</p>
-                <small>{story.readTime || 5} min read</small>
-                <Link to={`/publications/${story._id}`} className="btn btn-outline">
-                  Read Story
+                <h3>{publication.title}</h3>
+                <p>{publication.excerpt || publication.content?.substring(0, 100)}...</p>
+                <small>{publication.readTime || 5} min read</small>
+                <Link to={`/other-publications/${publication._id}`} className="btn btn-outline">
+                  Read Publication
                 </Link>
               </div>
             ))}
           </div>
           <div className="section-footer">
-            <Link to="/publications">View All Publications →</Link>
+            <Link to="/other-publications">View All Publications →</Link>
           </div>
         </div>
       </section>
@@ -125,7 +130,7 @@ function HomePage() {
       <section className="newsletter-section">
         <div className="container">
           <h2>Stay Updated</h2>
-          <p>Get the latest stories and updates directly to your inbox</p>
+          <p>Get the latest publications and updates directly to your inbox</p>
           <form className="newsletter-form">
             <input type="email" placeholder="Your email" required />
             <button type="submit" className="btn btn-primary">Subscribe</button>

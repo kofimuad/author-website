@@ -100,3 +100,18 @@ export const interviewsAPI = {
   update: (id, interviewData) => apiCall(`/interviews/${id}`, 'PUT', interviewData),
   delete: (id) => apiCall(`/interviews/${id}`, 'DELETE'),
 }
+// Publications API calls
+export const publicationsAPI = {
+  getAll: (genre, sortBy) => {
+    let url = '/publications'
+    const params = new URLSearchParams()
+    if (genre) params.append('genre', genre)
+    if (sortBy) params.append('sortBy', sortBy)
+    if (params.toString()) url += '?' + params.toString()
+    return apiCall(url)
+  },
+  getOne: (id) => apiCall(`/publications/${id}`),
+  create: (publicationData) => apiCall('/publications', 'POST', publicationData),
+  update: (id, publicationData) => apiCall(`/publications/${id}`, 'PUT', publicationData),
+  delete: (id) => apiCall(`/publications/${id}`, 'DELETE'),
+}

@@ -5,7 +5,7 @@ const connectDB = require('./config/db')
 
 const authRoutes = require('./routes/auth')
 const bookRoutes = require('./routes/books')
-const storyRoutes = require('./routes/stories')
+const publicationRoutes = require('./routes/publications')
 const behindTheScenesRoutes = require('./routes/behindTheScenes')
 const interviewRoutes = require('./routes/interviews')
 
@@ -30,7 +30,7 @@ connectDB()
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/books', bookRoutes)
-app.use('/api/stories', storyRoutes)
+app.use('/api/publications', publicationRoutes)
 app.use('/api/behind-the-scenes', behindTheScenesRoutes)
 app.use('/api/interviews', interviewRoutes)
 
@@ -70,8 +70,8 @@ app.listen(PORT, () => {
   console.log(`  POST   /api/auth/login           - Login user`)
   console.log(`  GET    /api/books                - Get all books`)
   console.log(`  POST   /api/books                - Create book (auth required)`)
-  console.log(`  GET    /api/stories              - Get all stories`)
-  console.log(`  POST   /api/stories              - Create story (auth required)`)
+  console.log(`  GET    /api/publications         - Get all publications`)
+  console.log(`  POST   /api/publications         - Create publication (auth required)`)
   console.log(`  GET    /api/behind-the-scenes    - Get all posts`)
   console.log(`  POST   /api/behind-the-scenes    - Create post (auth required)`)
   console.log(`  GET    /api/interviews           - Get all interviews`)
