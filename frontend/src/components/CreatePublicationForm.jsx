@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import { interviewsAPI } from '../utils/api'
+import { publicationsAPI } from '../utils/api'
 import './AdminForms.css'
 
 function CreatePublicationForm() {
   const [formData, setFormData] = useState({
     title: '',
     magazine: '',
-    publicationType: 'Interview',
+    publicationType: 'Poetry',
     category: 'Literary Magazine',
     description: '',
     poemExcerpt: '',
@@ -27,7 +27,7 @@ function CreatePublicationForm() {
 
   const fetchPublications = async () => {
     try {
-      const data = await interviewsAPI.getAll()
+      const data = await publicationsAPI.getAll()
       setPublications(data)
     } catch (error) {
       console.error('Error fetching publications:', error)
@@ -63,12 +63,12 @@ function CreatePublicationForm() {
     setMessage('')
 
     try {
-      await interviewsAPI.create(formData)
+      await publicationsAPI.create(formData)
       setMessage('✅ Publication added successfully!')
       setFormData({
         title: '',
         magazine: '',
-        publicationType: 'Interview',
+        publicationType: 'Poetry',
         category: 'Literary Magazine',
         description: '',
         poemExcerpt: '',
@@ -89,7 +89,7 @@ function CreatePublicationForm() {
   const handleDelete = async (id) => {
     if (window.confirm('Delete this publication?')) {
       try {
-        await interviewsAPI.delete(id)
+        await publicationsAPI.delete(id)
         setMessage('✅ Publication deleted!')
         fetchPublications()
       } catch (error) {
@@ -137,7 +137,7 @@ function CreatePublicationForm() {
             <div className="form-group">
               <label>Publication Type</label>
               <select name="publicationType" value={formData.publicationType} onChange={handleChange}>
-                <option>Interview</option>
+                <option>Poetry</option>
                 <option>Article</option>
                 <option>Feature</option>
                 <option>Podcast</option>

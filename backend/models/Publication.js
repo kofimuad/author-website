@@ -9,18 +9,21 @@ const publicationSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  content: {
+  magazine: {
     type: String,
     required: true,
   },
-  excerpt: String,
-  genre: [String],
-  thumbnailImage: String,
-  postedDate: {
-    type: Date,
-    default: Date.now,
+  publicationType: {
+    type: String,
+    enum: ['Poetry', 'Article', 'Feature', 'Essay', 'Short Story'],
+    default: 'Poetry',
   },
-  readTime: Number,
+  category: String,
+  description: String,
+  poemExcerpt: String,
+  publicationLogo: String,
+  readUrl: String,
+  publishedDate: Date,
   tags: [String],
   featured: Boolean,
   createdAt: {
