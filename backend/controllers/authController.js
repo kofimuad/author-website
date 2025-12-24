@@ -9,6 +9,14 @@ const register = async (req, res) => {
       return res.status(400).json({ message: 'Email and password are required' })
     }
 
+    // Check if any user already exists (only allow 1 author account)
+    const existingUsers = await User.find()
+    if (existingUsers.length > 0) {
+      return res.status(403).json({
+        message: 'Author account already created. Please login instead.'
+      })
+    }
+
     const existingUser = await User.findOne({ email })
     if (existingUser) {
       return res.status(400).json({ message: 'Email already registered' })
@@ -24,7 +32,7 @@ const register = async (req, res) => {
     )
 
     res.status(201).json({
-      message: 'User registered successfully',
+      message: 'Author account created successfully',
       token,
       user: { id: user._id, email: user.email, name: user.name },
     })

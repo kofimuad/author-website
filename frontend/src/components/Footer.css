@@ -3,6 +3,7 @@
   border-top: 1px solid var(--border-light);
   margin-top: 4rem;
   padding: 3rem 0 1rem;
+  animation: fadeInUp 0.6s ease;
 }
 
 .footer-content {
@@ -21,11 +22,12 @@
   display: block;
   margin-bottom: 0.5rem;
   color: var(--text-light);
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .footer-section a:hover {
   color: var(--primary-pink);
+  transform: translateX(4px);
 }
 
 .social-links {
@@ -41,16 +43,18 @@
 .newsletter-form input {
   flex: 1;
   padding: 0.5rem 1rem;
-  border: 1px solid var(--border-light);
+  border: 2px solid var(--border-light);
   border-radius: 6px;
   background-color: var(--bg-light);
   color: var(--text-dark);
   font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
 .newsletter-form input:focus {
   outline: none;
   border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(200, 182, 219, 0.2);
 }
 
 .footer-bottom {

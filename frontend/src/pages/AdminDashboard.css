@@ -1,5 +1,6 @@
 .admin-dashboard {
   min-height: calc(100vh - 200px);
+  animation: fadeInUp 0.6s ease;
 }
 
 .dashboard-header {
@@ -9,14 +10,16 @@
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 2px solid var(--border-light);
+  animation: slideInLeft 0.6s ease;
 }
 
 .dashboard-tabs {
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 2px solid var(--border-light);
   flex-wrap: wrap;
+  animation: fadeInDown 0.6s ease 0.1s backwards;
 }
 
 .tab {
@@ -28,6 +31,7 @@
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .tab:hover {
@@ -39,15 +43,28 @@
   border-bottom-color: var(--dark-purple);
 }
 
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, var(--primary-pink), var(--dark-purple));
+  transition: width 0.3s ease;
+}
+
 .dashboard-content {
   background-color: var(--bg-white);
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: var(--shadow-sm);
+  animation: fadeInUp 0.6s ease;
 }
 
 .form-container {
   max-width: 600px;
+  animation: fadeInUp 0.6s ease;
 }
 
 .form-container h2 {

@@ -21,6 +21,12 @@ function AdminLogin() {
     try {
       let response
       if (isRegister) {
+        // Check if account already exists
+        if (!email || !password || !name) {
+          setError('All fields are required')
+          setLoading(false)
+          return
+        }
         response = await authAPI.register(email, password, name)
       } else {
         response = await authAPI.login(email, password)
@@ -41,27 +47,35 @@ function AdminLogin() {
     <div className="admin-login-page">
       <div className="login-container">
         <div className="login-card">
-          <h1>{isRegister ? 'Create Account' : 'Admin Login'}</h1>
-          <p className="login-subtitle">Access your dashboard</p>
+          <div className="login-header">
+            <h1>{isRegister ? '✨ Create Author Account' : '✨ Author Login'}</h1>
+            <p className="login-subtitle">Secure access to your dashboard</p>
+          </div>
 
           {error && <div className="error-message">{error}</div>}
+
+          {isRegister && (
+            <div className="security-notice">
+              <p>⚠️ <strong>Note:</strong> Only create an account once. This will be your permanent author account.</p>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
             {isRegister && (
               <div className="form-group">
-                <label>Name</label>
+                <label>Author Name</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Your name"
+                  placeholder="Your full name"
                   required
                 />
               </div>
             )}
 
             <div className="form-group">
-              <label>Email</label>
+              <label>Email Address</label>
               <input
                 type="email"
                 value={email}
@@ -83,7 +97,7 @@ function AdminLogin() {
             </div>
 
             <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? 'Loading...' : isRegister ? 'Create Account' : 'Login'}
+              {loading ? 'Processing...' : isRegister ? 'Create Author Account' : 'Login to Dashboard'}
             </button>
           </form>
 
@@ -98,10 +112,22 @@ function AdminLogin() {
                 }}
                 className="toggle-button"
               >
-                {isRegister ? 'Login' : 'Register'}
+                {isRegister ? 'Login' : 'Register as Author'}
               </button>
             </p>
           </div>
+        </div>
+
+        <div className="login-info">
+          <h3>👋 Welcome Author</h3>
+          <p>This is your exclusive dashboard where you can:</p>
+          <ul>
+            <li>📚 Manage your books and publications</li>
+            <li>✍️ Create and edit short stories</li>
+            <li>📸 Share behind-the-scenes content</li>
+            <li>🎤 Add interviews and media features</li>
+            <li>📊 Track your content</li>
+          </ul>
         </div>
       </div>
     </div>

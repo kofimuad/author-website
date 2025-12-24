@@ -23,7 +23,7 @@ function Header() {
           <Link to="/">Home</Link>
           <Link to="/books">Books</Link>
           <Link to="/stories">Stories</Link>
-          <Link to="/behind-the-scenes">Behind the Scenes</Link>
+          <Link to="/behind-the-scenes">BTS</Link>
           <Link to="/interviews-publications">Interviews</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>

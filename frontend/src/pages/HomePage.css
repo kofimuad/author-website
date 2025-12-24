@@ -6,19 +6,38 @@
   background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-purple) 100%);
   padding: 4rem 0;
   text-align: center;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-bottom: 4rem;
+  animation: fadeInUp 0.8s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1), transparent),
+              radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
 }
 
 .hero h1 {
   color: var(--text-dark);
   margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .subtitle {
   font-size: 1.2rem;
   color: var(--text-dark);
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-buttons {
@@ -26,6 +45,8 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 .featured-section {
@@ -45,14 +66,22 @@
 .section-footer a {
   font-weight: 600;
   color: var(--dark-purple);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.section-footer a:hover {
+  transform: translateX(5px);
+  color: var(--primary-pink);
 }
 
 .newsletter-section {
   background: linear-gradient(135deg, var(--soft-rose) 0%, var(--blush) 100%);
   padding: 3rem;
-  border-radius: 12px;
+  border-radius: 16px;
   text-align: center;
   margin-bottom: 4rem;
+  animation: fadeInUp 0.8s ease 0.2s backwards;
 }
 
 .newsletter-section h2 {
@@ -73,9 +102,15 @@
 .newsletter-form input {
   flex: 1;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--border-light);
+  border: 2px solid var(--border-light);
   border-radius: 6px;
   font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form input:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(200, 182, 219, 0.2);
 }
 
 .card .meta {
