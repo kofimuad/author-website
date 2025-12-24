@@ -12,7 +12,7 @@ const interviewSchema = new mongoose.Schema({
   publicationName: String,
   publicationType: {
     type: String,
-    enum: ['Interview', 'Article', 'Feature', 'Podcast', 'Press Release'],
+    enum: ['Interview', 'Article', 'Feature', 'Podcast', 'Appearance', 'Video'],
     default: 'Interview',
   },
   description: String,
@@ -20,6 +20,9 @@ const interviewSchema = new mongoose.Schema({
   publicationLogo: String,
   featuredImage: String,
   externalLink: String,
+  // NEW: Video support
+  videoUrl: String,
+  videoEmbed: String,
   publishedDate: Date,
   tags: [String],
   featured: Boolean,

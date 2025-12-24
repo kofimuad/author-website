@@ -9,16 +9,16 @@ const behindTheScenesSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  content: {
-    type: String,
-    required: true,
-  },
+  content: String,
   contentType: {
     type: String,
     enum: ['Blog Post', 'Photo Series', 'Video', 'Announcement'],
     default: 'Blog Post',
   },
   featuredImage: String,
+  // NEW: Video embedding support
+  videoUrl: String, // YouTube, Vimeo embed URL
+  videoEmbed: String, // Iframe embed code
   postedDate: {
     type: Date,
     default: Date.now,

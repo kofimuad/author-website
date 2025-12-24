@@ -4,8 +4,7 @@ import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import BooksPage from './pages/BooksPage'
 import BookDetail from './pages/BookDetail'
-import StoriesPage from './pages/StoriesPage'
-import StoryDetail from './pages/StoryDetail'
+import PublicationsPage from './pages/PublicationsPage'
 import BehindTheScenesPage from './pages/BehindTheScenesPage'
 import PostDetail from './pages/PostDetail'
 import InterviewsPublicationsPage from './pages/InterviewsPublicationsPage'
@@ -27,8 +26,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/books" element={<BooksPage />} />
             <Route path="/books/:bookId" element={<BookDetail />} />
-            <Route path="/stories" element={<StoriesPage />} />
-            <Route path="/stories/:storyId" element={<StoryDetail />} />
+            <Route path="/other-publications" element={<PublicationsPage />} />
             <Route path="/behind-the-scenes" element={<BehindTheScenesPage />} />
             <Route path="/behind-the-scenes/:postId" element={<PostDetail />} />
             <Route path="/interviews-publications" element={<InterviewsPublicationsPage />} />

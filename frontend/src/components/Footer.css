@@ -1,87 +1,173 @@
 .footer {
-  background-color: var(--bg-white);
-  border-top: 1px solid var(--border-light);
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-dark);
   margin-top: 3rem;
-  padding: 2rem 0 1rem;
+  padding: clamp(1.5rem, 4vw, 2rem) 0 1rem;
   animation: fadeInUp 0.6s ease;
 }
 
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 80vw, 200px), 1fr));
+  gap: clamp(1.5rem, 4vw, 2rem);
   margin-bottom: 1.5rem;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 2rem;
+  padding: 0 clamp(1rem, 5vw, 2rem);
 }
 
 .footer-section h4 {
-  margin-bottom: 0.8rem;
-  color: var(--text-dark);
-  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
 }
 
 .footer-section a {
   display: block;
-  margin-bottom: 0.4rem;
-  color: var(--text-light);
-  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+  color: var(--text-lighter);
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
   transition: all 0.3s ease;
   border: none;
 }
 
 .footer-section a:hover {
-  color: var(--primary-pink);
+  color: var(--primary-purple);
   transform: translateX(3px);
 }
 
 .social-links {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
+/* Newsletter Form */
 .newsletter-form {
   display: flex;
-  gap: 0.4rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.newsletter-form input {
-  flex: 1;
-  padding: 0.5rem 0.8rem;
-  border: 1px solid var(--border-light);
+.newsletter-input {
+  padding: clamp(0.5rem, 2vw, 0.7rem);
+  border: 1px solid var(--border-dark);
   border-radius: 4px;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
-  font-size: 0.85rem;
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  font-family: 'Poppins', sans-serif;
   transition: all 0.3s ease;
+  min-width: 0;
 }
 
-.newsletter-form input:focus {
+.newsletter-input::placeholder {
+  color: var(--text-lighter);
+}
+
+.newsletter-input:focus {
   outline: none;
   border-color: var(--primary-purple);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 0 0 2px rgba(155, 126, 189, 0.15);
 }
 
-.footer-bottom {
-  border-top: 1px solid var(--border-light);
-  padding-top: 1rem;
-  text-align: center;
-  color: var(--text-light);
+.newsletter-form .btn {
+  padding: clamp(0.5rem, 2vw, 0.7rem);
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+}
+
+.subscribe-message {
   font-size: 0.8rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.subscribe-message.success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #81c784;
+}
+
+.subscribe-message.error {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #ef5350;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid var(--border-dark);
+  padding: clamp(0.8rem, 3vw, 1rem);
+  text-align: center;
+  color: var(--text-lighter);
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
 }
 
+.footer-bottom p {
+  margin: 0.3rem 0;
+}
+
+/* Responsive - Tablet */
 @media (max-width: 768px) {
+  .footer {
+    padding: 2rem 0 1rem;
+  }
+
   .footer-content {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
+  }
+
+  .newsletter-form {
+    flex-direction: row;
+  }
+
+  .newsletter-input {
+    flex: 1;
+    min-width: 150px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.5rem 0 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .footer-content {
+    gap: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .footer-section h4 {
+    margin-bottom: 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .footer-section a {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
   }
 
   .newsletter-form {
     flex-direction: column;
+  }
+
+  .newsletter-input {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom {
+    padding: 1rem;
+    font-size: 0.75rem;
+  }
+
+  .footer-bottom p {
+    margin: 0.2rem 0;
   }
 }

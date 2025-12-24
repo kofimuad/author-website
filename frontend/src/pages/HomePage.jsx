@@ -38,11 +38,11 @@ function HomePage() {
       {/* Hero Section */}
       <section className="hero">
         <div className="container">
-          <h1>Welcome to Author's Corner</h1>
+          <h1>Welcome to Kataru's Corner</h1>
           <p className="subtitle">Discover stories, insights, and the creative journey</p>
           <div className="hero-buttons">
             <Link to="/books" className="btn btn-primary">Explore Books</Link>
-            <Link to="/stories" className="btn btn-secondary">Read Stories</Link>
+            <Link to="/stories" className="btn btn-secondary">Other Publications</Link>
           </div>
         </div>
       </section>

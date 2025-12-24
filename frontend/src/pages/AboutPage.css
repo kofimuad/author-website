@@ -1,0 +1,270 @@
+.about-page {
+  min-height: calc(100vh - 200px);
+  padding: 2rem 0;
+}
+
+/* Hero */
+.about-hero {
+  text-align: center;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border-dark);
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s ease;
+}
+
+.about-hero h1 {
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  color: var(--primary-purple);
+  font-size: 1.1rem;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Bio Section */
+.about-section {
+  margin-bottom: 3rem;
+  animation: fadeInUp 0.8s ease backwards;
+}
+
+.about-section h2 {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-dark);
+  padding-bottom: 1rem;
+}
+
+.section-content {
+  max-width: 700px;
+}
+
+.opening-quote {
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--primary-purple);
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-left: 3px solid var(--primary-purple);
+  padding-left: 1.5rem;
+}
+
+.section-content p {
+  margin-bottom: 1rem;
+  line-height: 2;
+}
+
+/* About Grid */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 80vw, 450px), 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.about-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease backwards;
+}
+
+.about-card:nth-child(1) { animation-delay: 0.1s; }
+.about-card:nth-child(2) { animation-delay: 0.2s; }
+
+.about-card:hover {
+  border-color: var(--primary-purple);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.about-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--primary-purple);
+  padding-bottom: 1rem;
+}
+
+/* Timeline Dots */
+.timeline-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.timeline-dots::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary-purple), transparent);
+}
+
+.dot-item {
+  margin-left: 2rem;
+  position: relative;
+}
+
+.dot-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--dark-bg);
+  border: 2px solid var(--primary-purple);
+  border-radius: 50%;
+}
+
+.dot-item .year {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: var(--primary-purple);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.dot-item p {
+  margin: 0;
+  color: var(--text-lighter);
+  font-size: 0.9rem;
+}
+
+/* Style List */
+.style-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.style-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.style-emoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.style-item h4 {
+  margin-bottom: 0.3rem;
+  color: var(--text-light);
+}
+
+.style-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-lighter);
+}
+
+/* Philosophy Section */
+.philosophy-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.philosophy-section h2 {
+  border-color: var(--primary-purple);
+}
+
+/* Fun Facts */
+.fun-facts h2 {
+  border-color: var(--primary-purple);
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 50vw, 200px), 1fr));
+  gap: 1.5rem;
+}
+
+.fact-card {
+  background: linear-gradient(135deg, rgba(155, 126, 189, 0.1), rgba(155, 126, 189, 0.05));
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.fact-card:hover {
+  border-color: var(--primary-purple);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.fact-card h4 {
+  font-size: 2rem;
+  color: var(--primary-purple);
+  margin-bottom: 0.5rem;
+}
+
+.fact-card p {
+  margin: 0;
+  color: var(--text-lighter);
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 2rem 0;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .opening-quote {
+    font-size: 1rem;
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .fact-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .fact-card h4 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .about-card {
+    padding: 1.5rem;
+  }
+
+  .about-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .philosophy-section {
+    padding: 1.5rem;
+  }
+
+  .facts-grid {
+    gap: 0.8rem;
+  }
+}

@@ -214,3 +214,27 @@
     grid-template-columns: 1fr;
   }
 }
+
+.video-input-group {
+  margin-bottom: 1.2rem;
+}
+
+.video-preview {
+  margin-top: 1rem;
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #000;
+}
+
+.video-preview iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}

@@ -1,0 +1,371 @@
+.publications-page {
+  min-height: calc(100vh - 200px);
+  padding: 2rem 0;
+}
+
+/* Hero Section */
+.pub-hero {
+  text-align: center;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-dark);
+  animation: fadeInDown 0.8s ease;
+}
+
+.pub-hero h1 {
+  margin-bottom: 0.5rem;
+}
+
+.pub-subtitle {
+  color: var(--primary-purple);
+  font-size: 1.05rem;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 2rem;
+  animation: slideInLeft 0.6s ease 0.1s backwards;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: var(--text-lighter);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(155, 126, 189, 0.1);
+}
+
+/* Category Filter */
+.category-filter {
+  margin-bottom: 2rem;
+  animation: slideInLeft 0.6s ease 0.15s backwards;
+}
+
+.filter-label {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: var(--text-light);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--card-bg);
+  color: var(--text-lighter);
+  border: 1px solid var(--border-dark);
+  border-radius: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  border-color: var(--primary-purple);
+  color: var(--primary-purple);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--primary-purple), var(--light-purple));
+  color: var(--dark-bg);
+  border-color: var(--primary-purple);
+}
+
+/* Results Count */
+.results-count {
+  color: var(--text-lighter);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Featured Info */
+.featured-info {
+  margin-bottom: 2rem;
+}
+
+.featured-badge {
+  display: inline-block;
+  background-color: rgba(155, 126, 189, 0.15);
+  color: var(--primary-purple);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Publications Grid */
+.publications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(280px, 80vw, 380px), 1fr));
+  gap: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 3rem;
+}
+
+.pub-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease backwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.pub-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-purple), var(--light-purple));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.pub-card:hover::before {
+  transform: scaleX(1);
+}
+
+.pub-card:hover {
+  border-color: var(--primary-purple);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-6px);
+}
+
+.pub-card.featured {
+  border-color: var(--primary-purple);
+  background: linear-gradient(135deg, rgba(155, 126, 189, 0.05), rgba(155, 126, 189, 0.02));
+}
+
+.pub-card.featured:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Featured Ribbon */
+.featured-ribbon {
+  position: absolute;
+  top: 1rem;
+  right: -2rem;
+  background: linear-gradient(135deg, var(--primary-purple), var(--light-purple));
+  color: var(--dark-bg);
+  padding: 0.4rem 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transform: rotate(45deg);
+  letter-spacing: 1px;
+}
+
+/* Magazine Header */
+.mag-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.mag-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 4px;
+  background-color: rgba(155, 126, 189, 0.1);
+  padding: 4px;
+}
+
+.mag-logo-placeholder {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-purple), var(--light-purple));
+  color: var(--dark-bg);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.mag-info {
+  flex: 1;
+}
+
+.magazine-name {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  color: var(--text-light);
+}
+
+.pub-category {
+  display: inline-block;
+  background-color: rgba(155, 126, 189, 0.15);
+  color: var(--primary-purple);
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Poem Title */
+.poem-title {
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+/* Publication Date */
+.pub-date {
+  color: var(--text-lighter);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Poem Excerpt */
+.poem-excerpt {
+  background-color: rgba(155, 126, 189, 0.08);
+  border-left: 3px solid var(--primary-purple);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.poem-excerpt p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  white-space: pre-line;
+}
+
+/* Description */
+.pub-description {
+  color: var(--text-lighter);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: var(--card-bg);
+  border: 1px dashed var(--border-dark);
+  border-radius: 8px;
+  animation: fadeInUp 0.6s ease;
+}
+
+.empty-state p {
+  margin-bottom: 1.5rem;
+  color: var(--text-lighter);
+  font-size: 1.05rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .publications-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .pub-card {
+    padding: 1.5rem;
+  }
+
+  .mag-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .filter-buttons {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pub-hero {
+    padding: 2rem 0;
+  }
+
+  .pub-hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .publications-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .pub-card {
+    padding: 1.2rem;
+  }
+
+  .featured-ribbon {
+    font-size: 0.6rem;
+    padding: 0.3rem 1rem;
+  }
+
+  .poem-excerpt {
+    padding: 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .search-input {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .filter-buttons {
+    overflow-x: auto;
+    padding-bottom: 0.8rem;
+  }
+}
