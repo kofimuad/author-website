@@ -1,70 +1,133 @@
 .admin-dashboard {
   min-height: calc(100vh - 200px);
-  animation: fadeInUp 0.6s ease;
+  background-color: var(--dark-bg);
+  padding-bottom: 2rem;
 }
 
 .dashboard-header {
+  background: linear-gradient(135deg, rgba(155, 126, 189, 0.1), rgba(155, 126, 189, 0.05));
+  border-bottom: 1px solid var(--border-dark);
+  padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s ease;
+}
+
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-light);
-  animation: slideInLeft 0.6s ease;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 2rem);
 }
 
 .dashboard-header h1 {
-  font-size: 1.6rem;
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
 }
 
-.dashboard-tabs {
-  display: flex;
-  gap: 0.8rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-light);
-  flex-wrap: wrap;
-  animation: fadeInDown 0.6s ease 0.1s backwards;
+.logout-btn {
+  padding: clamp(0.5rem, 2vw, 0.7rem) clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
 }
 
-.tab {
-  padding: 0.6rem 1rem;
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--text-light);
+/* Section Navigation - Card Style */
+.section-nav {
+  margin-bottom: 3rem;
+  animation: slideInLeft 0.6s ease 0.1s backwards;
+}
+
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 80vw, 240px), 1fr));
+  gap: clamp(1rem, 3vw, 1.5rem);
+}
+
+.nav-card {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-dark);
+  border-radius: 12px;
+  padding: clamp(1.2rem, 4vw, 1.8rem);
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.85rem;
   transition: all 0.3s ease;
-  position: relative;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: fadeInUp 0.6s ease backwards;
 }
 
-.tab:hover {
-  color: var(--text-dark);
+.nav-card:nth-child(1) { animation-delay: 0.1s; }
+.nav-card:nth-child(2) { animation-delay: 0.15s; }
+.nav-card:nth-child(3) { animation-delay: 0.2s; }
+.nav-card:nth-child(4) { animation-delay: 0.25s; }
+
+.nav-card:hover {
+  border-color: var(--primary-purple);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-6px);
 }
 
-.tab.active {
-  color: var(--dark-purple);
-  border-bottom-color: var(--dark-purple);
+.nav-card.active {
+  background: linear-gradient(135deg, rgba(155, 126, 189, 0.15), rgba(155, 126, 189, 0.08));
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 1px var(--primary-purple), var(--shadow-md);
 }
 
+.nav-icon {
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.nav-label {
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-light);
+}
+
+.nav-description {
+  margin: 0;
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+  color: var(--text-lighter);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Dashboard Content */
 .dashboard-content {
-  background-color: var(--bg-white);
-  padding: 1.5rem;
-  border-radius: 6px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-dark);
+  border-radius: 12px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
   box-shadow: var(--shadow-sm);
-  animation: fadeInUp 0.6s ease;
+  animation: fadeInUp 0.8s ease;
+  min-height: 500px;
 }
 
-.form-container {
-  max-width: 600px;
-  animation: fadeInUp 0.6s ease;
+/* Responsive */
+@media (max-width: 1024px) {
+  .nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.form-container h2 {
-  margin-bottom: 1.2rem;
-  font-size: 1.5rem;
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .nav-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .dashboard-content {
+    padding: 1.5rem 1rem;
+  }
 }

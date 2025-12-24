@@ -1,14 +1,42 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { removeToken } from '../utils/auth'
-import { booksAPI, storiesAPI, btsAPI, interviewsAPI } from '../utils/api'
+import CreatePublicationForm from '../components/CreatePublicationForm'
+import CreateBTSForm from '../components/CreateBTSForm'
+import CreateInterviewForm from '../components/CreateInterviewForm'
 import CreateBookForm from '../components/CreateBookForm'
-import CreateStoryForm from '../components/CreateStoryForm'
 import './AdminDashboard.css'
 
 function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState('books')
+  const [activeSection, setActiveSection] = useState('publications')
   const navigate = useNavigate()
+
+  const sections = [
+    {
+      id: 'publications',
+      label: 'Publications',
+      icon: '📚',
+      description: 'Manage published works',
+    },
+    {
+      id: 'bts',
+      label: 'Behind the Scenes',
+      icon: '🎬',
+      description: 'Video & photo content',
+    },
+    {
+      id: 'interviews',
+      label: 'Interviews',
+      icon: '🎤',
+      description: 'Media appearances',
+    },
+    {
+      id: 'books',
+      label: 'Books',
+      icon: '📖',
+      description: 'Published books',
+    },
+  ]
 
   const handleLogout = () => {
     removeToken()
@@ -17,45 +45,41 @@ function AdminDashboard() {
 
   return (
     <div className="admin-dashboard">
+      {/* Header */}
       <div className="dashboard-header">
-        <h1>📊 Admin Dashboard</h1>
-        <button onClick={handleLogout} className="btn btn-secondary">
-          Logout
-        </button>
+        <div className="header-content">
+          <h1>✨ Admin Dashboard</h1>
+          <button onClick={handleLogout} className="btn btn-secondary logout-btn">
+            Logout
+          </button>
+        </div>
       </div>
 
-      <div className="dashboard-tabs">
-        <button
-          className={`tab ${activeTab === 'books' ? 'active' : ''}`}
-          onClick={() => setActiveTab('books')}
-        >
-          Books
-        </button>
-        <button
-          className={`tab ${activeTab === 'stories' ? 'active' : ''}`}
-          onClick={() => setActiveTab('stories')}
-        >
-          Stories
-        </button>
-        <button
-          className={`tab ${activeTab === 'bts' ? 'active' : ''}`}
-          onClick={() => setActiveTab('bts')}
-        >
-          Behind the Scenes
-        </button>
-        <button
-          className={`tab ${activeTab === 'interviews' ? 'active' : ''}`}
-          onClick={() => setActiveTab('interviews')}
-        >
-          Interviews
-        </button>
-      </div>
+      {/* Section Navigation - Card Style */}
+      <div className="container">
+        <div className="section-nav">
+          <div className="nav-grid">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                className={`nav-card ${activeSection === section.id ? 'active' : ''}`}
+                onClick={() => setActiveSection(section.id)}
+              >
+                <span className="nav-icon">{section.icon}</span>
+                <h3 className="nav-label">{section.label}</h3>
+                <p className="nav-description">{section.description}</p>
+              </button>
+            ))}
+          </div>
+        </div>
 
-      <div className="dashboard-content">
-        {activeTab === 'books' && <CreateBookForm />}
-        {activeTab === 'stories' && <CreateStoryForm />}
-        {activeTab === 'bts' && <div><p>Behind the Scenes form coming soon</p></div>}
-        {activeTab === 'interviews' && <div><p>Interviews form coming soon</p></div>}
+        {/* Content Area */}
+        <div className="dashboard-content">
+          {activeSection === 'publications' && <CreatePublicationForm />}
+          {activeSection === 'bts' && <CreateBTSForm />}
+          {activeSection === 'interviews' && <CreateInterviewForm />}
+          {activeSection === 'books' && <CreateBookForm />}
+        </div>
       </div>
     </div>
   )

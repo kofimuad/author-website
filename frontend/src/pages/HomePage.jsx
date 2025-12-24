@@ -42,7 +42,7 @@ function HomePage() {
           <p className="subtitle">Discover stories, insights, and the creative journey</p>
           <div className="hero-buttons">
             <Link to="/books" className="btn btn-primary">Explore Books</Link>
-            <Link to="/stories" className="btn btn-secondary">Other Publications</Link>
+            <Link to="/publications" className="btn btn-secondary">Other Publications</Link>
           </div>
         </div>
       </section>
@@ -74,7 +74,7 @@ function HomePage() {
       {/* Featured Stories */}
       <section className="featured-section">
         <div className="container">
-          <h2>Latest Stories</h2>
+          <h2>Latest Publications</h2>
           <div className="grid grid-2">
             {featured.stories.map((story) => (
               <div key={story._id} className="card">
@@ -84,14 +84,14 @@ function HomePage() {
                 <h3>{story.title}</h3>
                 <p>{story.excerpt || story.content?.substring(0, 100)}...</p>
                 <small>{story.readTime || 5} min read</small>
-                <Link to={`/stories/${story._id}`} className="btn btn-outline">
+                <Link to={`/publications/${story._id}`} className="btn btn-outline">
                   Read Story
                 </Link>
               </div>
             ))}
           </div>
           <div className="section-footer">
-            <Link to="/stories">View All Stories →</Link>
+            <Link to="/publications">View All Publications →</Link>
           </div>
         </div>
       </section>
