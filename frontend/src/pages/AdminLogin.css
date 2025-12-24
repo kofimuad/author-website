@@ -1,0 +1,54 @@
+.admin-login-page {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card {
+  background-color: var(--bg-white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.login-card h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.login-card form {
+  margin: 1.5rem 0;
+}
+
+.login-toggle {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-light);
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  color: var(--dark-purple);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 0.5rem;
+}
+
+.toggle-button:hover {
+  color: var(--primary-pink);
+}
