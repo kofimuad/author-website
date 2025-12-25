@@ -84,23 +84,22 @@ function ContactPage() {
           <div className="contact-info">
             <div className="info-card">
               <h3>Publisher</h3>
-              <p>Publishing House Name</p>
-              <p>contact@publisher.com</p>
-              <p>+1 (555) 123-4567</p>
+              <p>Shaherazad Shelves</p>
+              <p><a href="https://shaherazadshelves.com/">Get in Touch</a></p>
             </div>
 
-            <div className="info-card">
+            {/* <div className="info-card">
               <h3>Agent</h3>
               <p>Agent Name</p>
               <p>Agency Name</p>
               <p>agent@agency.com</p>
-            </div>
+            </div> */}
 
             <div className="info-card">
               <h3>Follow Me</h3>
-              <p><a href="#instagram">Instagram</a></p>
-              <p><a href="#twitter">Twitter</a></p>
-              <p><a href="#tiktok">TikTok</a></p>
+              <p><a href="https://www.instagram.com/kforkataru/">Instagram</a></p>
+              <p><a href="https://x.com/kforkataru">Twitter</a></p>
+              {/* <p><a href="#tiktok">TikTok</a></p> */}
             </div>
           </div>
         </div>
