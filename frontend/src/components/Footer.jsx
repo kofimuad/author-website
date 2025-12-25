@@ -38,9 +38,9 @@ function Footer() {
           <div className="footer-section">
             <h4>Follow Me</h4>
             <div className="social-links">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a>
+              <a href="https://www.instagram.com/kforkataru/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://x.com/kforkataru" target="_blank" rel="noopener noreferrer">Twitter</a>
+              {/* <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a> */}
             </div>
           </div>
 
