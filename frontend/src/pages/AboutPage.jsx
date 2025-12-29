@@ -18,7 +18,7 @@ function AboutPage() {
         <section className="about-section bio-section">
           <div className="section-content">
             <p className="opening-quote">
-              "We do not escape into philosophy, psychology, and the art - we go there to restore our shattered selvees into whole ones." - Anais Nin, from <i>In Favor of the Sensitive Man and Other Essays</i>
+              "We do not escape into philosophy, psychology, and the art - we go there to restore our shattered selves into whole ones." - Anais Nin, from <i>In Favor of the Sensitive Man and Other Essays</i>
             </p>
             
             <p>
@@ -95,7 +95,7 @@ function AboutPage() {
             </div>
           </section>
         {/* </div> */}
-
+        <br />
         {/* Philosophy */}
         <section className="about-section philosophy-section">
           <h2>My Philosophy</h2>
