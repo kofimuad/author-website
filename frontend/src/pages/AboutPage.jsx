@@ -18,8 +18,7 @@ function AboutPage() {
         <section className="about-section bio-section">
           <div className="section-content">
             <p className="opening-quote">
-              "Every story has the power to change someone's life. My mission is to craft narratives that 
-              resonate with the human experience."
+              "We do not escape into philosophy, psychology, and the art - we go there to restore our shattered selvees into whole ones." - Anais Nin, from <i>In Favor of the Sensitive Man and Other Essays</i>
             </p>
             
             <p>
@@ -27,19 +26,19 @@ function AboutPage() {
               that explore the depths of human emotion, challenge perspectives, and ultimately, transform 
               readers into believers of impossible things.
             </p>
-
+          {/* 
             <p>
               With over [X] years in the publishing industry, I've had the privilege of seeing my work 
               translated into [X] languages and reach readers across [X] countries. But more importantly, 
               I've built a community of readers who don't just consume my stories—they live in them.
-            </p>
+            </p> */}
           </div>
         </section>
 
         {/* Key Sections */}
-        <div className="about-grid">
+        {/* <div className="about-grid"> */}
           {/* Writing Journey */}
-          <section className="about-card journey-card">
+          {/* <section className="about-card journey-card">
             <h2>My Journey</h2>
             <div className="timeline-dots">
               <div className="dot-item">
@@ -59,36 +58,43 @@ function AboutPage() {
                 <p>Continuing to create</p>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* Writing Style */}
           <section className="about-card style-card">
             <h2>What I Write</h2>
             <div className="style-list">
               <div className="style-item">
-                <span className="style-emoji">📖</span>
+                <span className="style-emoji">🌟</span>
                 <div>
-                  <h4>Literary Fiction</h4>
-                  <p>Stories that explore the human condition</p>
+                  <h4>Fantasy</h4>
+                  <p>Epic worlds with magic, wonder, and adventure</p>
                 </div>
               </div>
               <div className="style-item">
-                <span className="style-emoji">✨</span>
+                <span className="style-emoji">🌍</span>
                 <div>
-                  <h4>Contemporary Tales</h4>
-                  <p>Narratives rooted in modern life</p>
+                  <h4>Contemporary</h4>
+                  <p>Real characters facing modern challenges</p>
                 </div>
               </div>
               <div className="style-item">
-                <span className="style-emoji">🎭</span>
+                <span className="style-emoji">💫</span>
                 <div>
-                  <h4>Character-Driven</h4>
-                  <p>Complex, relatable protagonists</p>
+                  <h4>Poetry</h4>
+                  <p>Lyrical language capturing emotion and truth</p>
+                </div>
+              </div>
+              <div className="style-item">
+                <span className="style-emoji">✍️</span>
+                <div>
+                  <h4>Personal Essays</h4>
+                  <p>Reflective explorations of life and meaning</p>
                 </div>
               </div>
             </div>
           </section>
-        </div>
+        {/* </div> */}
 
         {/* Philosophy */}
         <section className="about-section philosophy-section">
@@ -105,7 +111,7 @@ function AboutPage() {
         </section>
 
         {/* Fun Facts */}
-        <section className="about-section fun-facts">
+        {/* <section className="about-section fun-facts">
           <h2>Quick Facts</h2>
           <div className="facts-grid">
             <div className="fact-card">
@@ -125,7 +131,7 @@ function AboutPage() {
               <p>Languages Published</p>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
     </div>
   )
