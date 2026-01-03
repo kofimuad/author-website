@@ -89,7 +89,7 @@ function HomePage() {
                 <h3>{publication.title}</h3>
                 <p>{publication.excerpt || publication.content?.substring(0, 100)}...</p>
                 <small>{publication.readTime || 5} min read</small>
-                <Link to={`/other-publications/${publication._id}`} className="btn btn-outline">
+                <Link to={`/other-publications`} className="btn btn-outline">
                   Read Publication
                 </Link>
               </div>
