@@ -83,15 +83,31 @@ function HomePage() {
           <div className="grid grid-2">
             {featured.publications.map((publication) => (
               <div key={publication._id} className="card">
-                {publication.thumbnailImage && (
-                  <img src={publication.thumbnailImage} alt={publication.title} className="card-image" />
+                {publication.publicationLogo && (
+                  <img src={publication.publicationLogo} alt={publication.magazine} className="card-image" />
                 )}
                 <h3>{publication.title}</h3>
-                <p>{publication.excerpt || publication.content?.substring(0, 100)}...</p>
-                <small>{publication.readTime || 5} min read</small>
-                <Link to={`/other-publications`} className="btn btn-outline">
-                  Read Publication
-                </Link>
+                <p className="magazine-name">{publication.magazine}</p>
+                {publication.poemExcerpt ? (
+                  <p>{publication.poemExcerpt}</p>
+                ) : (
+                  <p>{publication.description?.substring(0, 100)}...</p>
+                )}
+                {/* <small>{publication.readTime || 5} min read</small> */}
+                {publication.readUrl ? (
+                  <a 
+                    href={publication.readUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="btn btn-outline"
+                  >
+                    Read on {publication.magazine} →
+                  </a>
+                ) : (
+                  <Link to={`/other-publications`} className="btn btn-outline">
+                    View All Publications
+                  </Link>
+                )}
               </div>
             ))}
           </div>
