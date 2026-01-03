@@ -102,7 +102,7 @@ function CreatePublicationForm() {
     <div className="form-section">
       <div className="form-container">
         <h2>📚 Add Published Work</h2>
-        <p className="form-description">Add a publication from an external magazine or platform</p>
+        <p className="form-description">Add a publication from an external magazine, journal, or platform</p>
         
         {message && <div className={`message ${message.includes('✅') ? 'success' : 'error'}`}>{message}</div>}
 
@@ -127,7 +127,7 @@ function CreatePublicationForm() {
                 name="magazine"
                 value={formData.magazine}
                 onChange={handleChange}
-                placeholder="e.g., The New Yorker"
+                placeholder="e.g., The New Yorker, Substack, Medium"
                 required
               />
             </div>
@@ -139,21 +139,26 @@ function CreatePublicationForm() {
               <select name="publicationType" value={formData.publicationType} onChange={handleChange}>
                 <option>Poetry</option>
                 <option>Article</option>
+                <option>Essay</option>
                 <option>Feature</option>
-                <option>Podcast</option>
-                <option>Appearance</option>
+                <option>Short Story</option>
               </select>
             </div>
 
             <div className="form-group">
               <label>Category</label>
-              <input
-                type="text"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                placeholder="e.g., Literary Magazine"
-              />
+              <select name="category" value={formData.category} onChange={handleChange}>
+                <option>Literary Magazine</option>
+                <option>Poetry Journal</option>
+                <option>Independent Magazine</option>
+                <option>Online Literary Magazine</option>
+                <option>Poetry Organization</option>
+                <option>Literary Journal</option>
+                <option>International Journal</option>
+                <option>Substack Essays</option>
+                <option>Medium Essays</option>
+                <option>Personal Blog</option>
+              </select>
             </div>
           </div>
 

@@ -24,7 +24,19 @@ function PublicationsPage() {
   }, [])
 
   // Filter publications
-  const categories = ['all', 'literary magazine', 'poetry journal', 'independent magazine', 'online literary magazine', 'poetry organization', 'literary journal', 'international journal']
+  const categories = [
+    'all',
+    'literary magazine',
+    'poetry journal',
+    'independent magazine',
+    'online literary magazine',
+    'poetry organization',
+    'literary journal',
+    'international journal',
+    'substack essays',
+    'medium essays',
+    'personal blog'
+  ]
   
   const filtered = publications.filter(pub => {
     const matchesCategory = activeCategory === 'all' || pub.category.toLowerCase() === activeCategory
@@ -42,7 +54,7 @@ function PublicationsPage() {
         {/* Hero */}
         <div className="pub-hero">
           <h1>Published Poetry</h1>
-          <p className="pub-subtitle">Featured in prestigious literary magazines and journals</p>
+          <p className="pub-subtitle">Featured in prestigious literary magazines, journals, and platforms</p>
         </div>
 
         {/* Search Bar */}
@@ -66,7 +78,7 @@ function PublicationsPage() {
                 className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
                 onClick={() => setActiveCategory(cat)}
               >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {cat === 'all' ? 'All' : cat.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
               </button>
             ))}
           </div>

@@ -5,6 +5,7 @@ import CreatePublicationForm from '../components/CreatePublicationForm'
 import CreateBTSForm from '../components/CreateBTSForm'
 import CreateInterviewForm from '../components/CreateInterviewForm'
 import CreateBookForm from '../components/CreateBookForm'
+import CreateAboutForm from '../components/CreateAboutForm'
 import './AdminDashboard.css'
 
 function AdminDashboard() {
@@ -35,6 +36,12 @@ function AdminDashboard() {
       label: 'Books',
       icon: '📖',
       description: 'Published books',
+    },
+    {
+      id: 'about',
+      label: 'About',
+      icon: '👤',
+      description: 'Edit your bio',
     },
   ]
 
@@ -79,6 +86,7 @@ function AdminDashboard() {
           {activeSection === 'bts' && <CreateBTSForm />}
           {activeSection === 'interviews' && <CreateInterviewForm />}
           {activeSection === 'books' && <CreateBookForm />}
+          {activeSection === 'about' && <CreateAboutForm />}
         </div>
       </div>
     </div>
