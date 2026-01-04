@@ -53,7 +53,7 @@ function PublicationsPage() {
       <div className="container">
         {/* Hero */}
         <div className="pub-hero">
-          <h1>Published Poetry</h1>
+          <h1>Other Publications</h1>
           <p className="pub-subtitle">Featured in prestigious literary magazines, journals, and platforms</p>
         </div>
 
