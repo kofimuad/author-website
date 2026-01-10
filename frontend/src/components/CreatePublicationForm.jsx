@@ -58,6 +58,17 @@ function CreatePublicationForm() {
     }
   }
 
+  const handleRemoveLogo = () => {
+    setLogoPreview('')
+    setFormData({
+      ...formData,
+      publicationLogo: '',
+    })
+    // Reset file input
+    const fileInput = document.getElementById('logo-upload')
+    if (fileInput) fileInput.value = ''
+  }
+
   const resetForm = () => {
     setFormData({
       title: '',
@@ -73,6 +84,8 @@ function CreatePublicationForm() {
     })
     setLogoPreview('')
     setEditingId(null)
+    const fileInput = document.getElementById('logo-upload')
+    if (fileInput) fileInput.value = ''
   }
 
   const handleEdit = (pub) => {
@@ -215,9 +228,18 @@ function CreatePublicationForm() {
                 📤 Choose Logo
               </label>
             </div>
+            
             {logoPreview && (
               <div className="image-preview">
                 <img src={logoPreview} alt="Logo Preview" />
+                <button 
+                  type="button"
+                  className="btn btn-delete"
+                  onClick={handleRemoveLogo}
+                  style={{ marginTop: '0.8rem', width: '100%' }}
+                >
+                  🗑️ Remove Image
+                </button>
               </div>
             )}
           </div>
