@@ -93,9 +93,10 @@ function CreatePublicationForm() {
     
     // Scroll to form with smooth behavior
     setTimeout(() => {
-      const formContainer = document.querySelector('.form-container')
-      if (formContainer) {
-        formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const formSection = document.querySelector('.form-section')
+      if (formSection) {
+        const offsetTop = formSection.offsetTop - 150
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' })
       }
     }, 0)
   }
