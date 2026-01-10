@@ -16,6 +16,7 @@ function CreateBTSForm() {
   const [message, setMessage] = useState('')
   const [posts, setPosts] = useState([])
   const [showList, setShowList] = useState(false)
+  const [editingId, setEditingId] = useState(null)
 
   useEffect(() => {
     fetchPosts()
@@ -53,6 +54,33 @@ function CreateBTSForm() {
     }
   }
 
+  const resetForm = () => {
+    setFormData({
+      title: '',
+      content: '',
+      contentType: 'Blog Post',
+      featuredImage: '',
+      videoUrl: '',
+      tags: '',
+    })
+    setPreview('')
+    setEditingId(null)
+  }
+
+  const handleEdit = (post) => {
+    setFormData({
+      title: post.title,
+      content: post.content,
+      contentType: post.contentType,
+      featuredImage: post.featuredImage,
+      videoUrl: post.videoUrl || '',
+      tags: post.tags ? post.tags.join(', ') : '',
+    })
+    setPreview(post.featuredImage || '')
+    setEditingId(post._id)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -63,18 +91,18 @@ function CreateBTSForm() {
         ...formData,
         tags: formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
       }
-      await btsAPI.create(submitData)
-      setMessage('✅ BTS post created successfully!')
-      setFormData({
-        title: '',
-        content: '',
-        contentType: 'Blog Post',
-        featuredImage: '',
-        videoUrl: '',
-        tags: '',
-      })
-      setPreview('')
+      
+      if (editingId) {
+        await btsAPI.update(editingId, submitData)
+        setMessage('✅ BTS post updated successfully!')
+      } else {
+        await btsAPI.create(submitData)
+        setMessage('✅ BTS post created successfully!')
+      }
+      
+      resetForm()
       fetchPosts()
+      setTimeout(() => setMessage(''), 3000)
     } catch (error) {
       setMessage(`❌ Error: ${error.message}`)
     } finally {
@@ -97,8 +125,10 @@ function CreateBTSForm() {
   return (
     <div className="form-section">
       <div className="form-container">
-        <h2>🎬 Create Behind the Scenes Post</h2>
-        <p className="form-description">Share videos, photos, and exclusive content</p>
+        <h2>{editingId ? '✏️ Edit Behind the Scenes Post' : '🎬 Create Behind the Scenes Post'}</h2>
+        <p className="form-description">
+          {editingId ? 'Update your post details' : 'Share videos, photos, and exclusive content'}
+        </p>
         
         {message && <div className={`message ${message.includes('✅') ? 'success' : 'error'}`}>{message}</div>}
 
@@ -126,7 +156,7 @@ function CreateBTSForm() {
           </div>
 
           <div className="form-group">
-            <label>Image or Video (Optional)</label>
+            <label>Image or Video {editingId ? '' : '(Optional)'}</label>
             <div className="image-upload">
               <input
                 type="file"
@@ -183,9 +213,16 @@ function CreateBTSForm() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Creating...' : '✨ Create Post'}
-          </button>
+          <div className="form-actions">
+            <button type="submit" className="btn btn-primary" disabled={loading}>
+              {loading ? 'Saving...' : editingId ? '✏️ Update Post' : '✨ Create Post'}
+            </button>
+            {editingId && (
+              <button type="button" className="btn btn-secondary" onClick={resetForm} disabled={loading}>
+                Cancel Edit
+              </button>
+            )}
+          </div>
         </form>
       </div>
 
@@ -210,12 +247,23 @@ function CreateBTSForm() {
                   )}
                   <h4>{post.title}</h4>
                   <p className="item-meta">{post.contentType}</p>
-                  <button
-                    className="btn btn-delete"
-                    onClick={() => handleDelete(post._id)}
-                  >
-                    🗑️ Delete
-                  </button>
+                  <p className="item-date">
+                    {new Date(post.postedDate).toLocaleDateString()}
+                  </p>
+                  <div className="item-actions">
+                    <button
+                      className="btn btn-outline"
+                      onClick={() => handleEdit(post)}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button
+                      className="btn btn-delete"
+                      onClick={() => handleDelete(post._id)}
+                    >
+                      🗑️ Delete
+                    </button>
+                  </div>
                 </div>
               ))
             )}

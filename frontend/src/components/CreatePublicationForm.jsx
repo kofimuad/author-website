@@ -20,6 +20,7 @@ function CreatePublicationForm() {
   const [message, setMessage] = useState('')
   const [publications, setPublications] = useState([])
   const [showList, setShowList] = useState(false)
+  const [editingId, setEditingId] = useState(null)
 
   useEffect(() => {
     fetchPublications()
@@ -57,28 +58,57 @@ function CreatePublicationForm() {
     }
   }
 
+  const resetForm = () => {
+    setFormData({
+      title: '',
+      magazine: '',
+      publicationType: 'Poetry',
+      category: 'Literary Magazine',
+      description: '',
+      poemExcerpt: '',
+      publishedDate: '',
+      readUrl: '',
+      publicationLogo: '',
+      featured: false,
+    })
+    setLogoPreview('')
+    setEditingId(null)
+  }
+
+  const handleEdit = (pub) => {
+    setFormData({
+      title: pub.title,
+      magazine: pub.magazine,
+      publicationType: pub.publicationType,
+      category: pub.category,
+      description: pub.description,
+      poemExcerpt: pub.poemExcerpt,
+      publishedDate: pub.publishedDate?.split('T')[0] || '',
+      readUrl: pub.readUrl,
+      publicationLogo: pub.publicationLogo,
+      featured: pub.featured || false,
+    })
+    setLogoPreview(pub.publicationLogo || '')
+    setEditingId(pub._id)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setMessage('')
 
     try {
-      await publicationsAPI.create(formData)
-      setMessage('✅ Publication added successfully!')
-      setFormData({
-        title: '',
-        magazine: '',
-        publicationType: 'Poetry',
-        category: 'Literary Magazine',
-        description: '',
-        poemExcerpt: '',
-        publishedDate: '',
-        readUrl: '',
-        publicationLogo: '',
-        featured: false,
-      })
-      setLogoPreview('')
+      if (editingId) {
+        await publicationsAPI.update(editingId, formData)
+        setMessage('✅ Publication updated successfully!')
+      } else {
+        await publicationsAPI.create(formData)
+        setMessage('✅ Publication added successfully!')
+      }
+      resetForm()
       fetchPublications()
+      setTimeout(() => setMessage(''), 3000)
     } catch (error) {
       setMessage(`❌ Error: ${error.message}`)
     } finally {
@@ -101,8 +131,10 @@ function CreatePublicationForm() {
   return (
     <div className="form-section">
       <div className="form-container">
-        <h2>📚 Add Published Work</h2>
-        <p className="form-description">Add a publication from an external magazine, journal, or platform</p>
+        <h2>{editingId ? '✏️ Edit Publication' : '📚 Add Published Work'}</h2>
+        <p className="form-description">
+          {editingId ? 'Update your publication details' : 'Add a publication from an external magazine, journal, or platform'}
+        </p>
         
         {message && <div className={`message ${message.includes('✅') ? 'success' : 'error'}`}>{message}</div>}
 
@@ -238,9 +270,16 @@ function CreatePublicationForm() {
             <label htmlFor="featured">Mark as Featured ⭐</label>
           </div>
 
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Adding...' : '✨ Add Publication'}
-          </button>
+          <div className="form-actions">
+            <button type="submit" className="btn btn-primary" disabled={loading}>
+              {loading ? 'Saving...' : editingId ? '✏️ Update Publication' : '✨ Add Publication'}
+            </button>
+            {editingId && (
+              <button type="button" className="btn btn-secondary" onClick={resetForm} disabled={loading}>
+                Cancel Edit
+              </button>
+            )}
+          </div>
         </form>
       </div>
 
@@ -266,12 +305,20 @@ function CreatePublicationForm() {
                   <h4>{pub.title}</h4>
                   <p className="pub-mag">{pub.magazine}</p>
                   <p className="pub-date">{new Date(pub.publishedDate).toLocaleDateString()}</p>
-                  <button
-                    className="btn btn-delete"
-                    onClick={() => handleDelete(pub._id)}
-                  >
-                    🗑️ Delete
-                  </button>
+                  <div className="item-actions">
+                    <button
+                      className="btn btn-outline"
+                      onClick={() => handleEdit(pub)}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button
+                      className="btn btn-delete"
+                      onClick={() => handleDelete(pub._id)}
+                    >
+                      🗑️ Delete
+                    </button>
+                  </div>
                 </div>
               ))
             )}

@@ -23,6 +23,7 @@ function CreateBookForm() {
   const [message, setMessage] = useState('')
   const [books, setBooks] = useState([])
   const [showBooks, setShowBooks] = useState(false)
+  const [editingId, setEditingId] = useState(null)
 
   useEffect(() => {
     fetchBooks()
@@ -71,27 +72,55 @@ function CreateBookForm() {
     }
   }
 
+  const resetForm = () => {
+    setFormData({
+      title: '',
+      description: '',
+      genre: [],
+      publicationDate: '',
+      pages: '',
+      isbn: '',
+      coverImage: '',
+      buyLinks: { amazon: '', goodreads: '', appleBooks: '' },
+      authorNote: '',
+    })
+    setPreview('')
+    setEditingId(null)
+  }
+
+  const handleEdit = (book) => {
+    setFormData({
+      title: book.title,
+      description: book.description,
+      genre: book.genre || [],
+      publicationDate: book.publicationDate?.split('T')[0] || '',
+      pages: book.pages || '',
+      isbn: book.isbn || '',
+      coverImage: book.coverImage,
+      buyLinks: book.buyLinks || { amazon: '', goodreads: '', appleBooks: '' },
+      authorNote: book.authorNote || '',
+    })
+    setPreview(book.coverImage || '')
+    setEditingId(book._id)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setMessage('')
 
     try {
-      await booksAPI.create(formData)
-      setMessage('✅ Book created successfully!')
-      setFormData({
-        title: '',
-        description: '',
-        genre: [],
-        publicationDate: '',
-        pages: '',
-        isbn: '',
-        coverImage: '',
-        buyLinks: { amazon: '', goodreads: '', appleBooks: '' },
-        authorNote: '',
-      })
-      setPreview('')
+      if (editingId) {
+        await booksAPI.update(editingId, formData)
+        setMessage('✅ Book updated successfully!')
+      } else {
+        await booksAPI.create(formData)
+        setMessage('✅ Book created successfully!')
+      }
+      resetForm()
       fetchBooks()
+      setTimeout(() => setMessage(''), 3000)
     } catch (error) {
       setMessage(`❌ Error: ${error.message}`)
     } finally {
@@ -114,7 +143,11 @@ function CreateBookForm() {
   return (
     <div className="form-section">
       <div className="form-container">
-        <h2>📚 Create a New Book</h2>
+        <h2>{editingId ? '✏️ Edit Book' : '📚 Create a New Book'}</h2>
+        <p className="form-description">
+          {editingId ? 'Update your book details' : 'Add a new book to your collection'}
+        </p>
+        
         {message && <div className={`message ${message.includes('✅') ? 'success' : 'error'}`}>{message}</div>}
         
         <form onSubmit={handleSubmit} className="admin-form">
@@ -131,14 +164,14 @@ function CreateBookForm() {
           </div>
 
           <div className="form-group">
-            <label>Book Cover Image *</label>
+            <label>Book Cover Image {editingId ? '' : '*'}</label>
             <div className="image-upload">
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
                 id="book-cover"
-                required
+                required={!editingId}
               />
               <label htmlFor="book-cover" className="upload-btn">
                 📤 Choose Image from Computer
@@ -186,6 +219,17 @@ function CreateBookForm() {
           </div>
 
           <div className="form-group">
+            <label>ISBN</label>
+            <input
+              type="text"
+              name="isbn"
+              value={formData.isbn}
+              onChange={handleChange}
+              placeholder="Book ISBN"
+            />
+          </div>
+
+          <div className="form-group">
             <label>Amazon Link</label>
             <input
               type="url"
@@ -207,14 +251,43 @@ function CreateBookForm() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Creating...' : '✨ Create Book'}
-          </button>
+          <div className="form-group">
+            <label>Apple Books Link</label>
+            <input
+              type="url"
+              name="buyLinks.appleBooks"
+              value={formData.buyLinks.appleBooks}
+              onChange={handleChange}
+              placeholder="https://books.apple.com/..."
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Author's Note</label>
+            <textarea
+              name="authorNote"
+              value={formData.authorNote}
+              onChange={handleChange}
+              rows="3"
+              placeholder="Add a personal note about this book"
+            />
+          </div>
+
+          <div className="form-actions">
+            <button type="submit" className="btn btn-primary" disabled={loading}>
+              {loading ? 'Saving...' : editingId ? '✏️ Update Book' : '✨ Create Book'}
+            </button>
+            {editingId && (
+              <button type="button" className="btn btn-secondary" onClick={resetForm} disabled={loading}>
+                Cancel Edit
+              </button>
+            )}
+          </div>
         </form>
       </div>
 
       {/* Books List */}
-      <div className="books-list-container">
+      <div className="list-container">
         <button 
           className="toggle-btn"
           onClick={() => setShowBooks(!showBooks)}
@@ -223,21 +296,30 @@ function CreateBookForm() {
         </button>
 
         {showBooks && (
-          <div className="books-grid">
+          <div className="items-grid">
             {books.length === 0 ? (
               <p className="empty-message">No books yet. Create your first one!</p>
             ) : (
               books.map((book) => (
-                <div key={book._id} className="book-item">
+                <div key={book._id} className="item-card">
                   {book.coverImage && (
-                    <img src={book.coverImage} alt={book.title} className="book-cover" />
+                    <img src={book.coverImage} alt={book.title} className="item-img" />
                   )}
-                  <div className="book-info">
-                    <h3>{book.title}</h3>
-                    <p className="book-date">
+                  <div className="item-info">
+                    <h4>{book.title}</h4>
+                    <p className="item-date">
                       {new Date(book.publicationDate).toLocaleDateString()}
                     </p>
-                    <div className="book-actions">
+                    {book.pages && (
+                      <p className="item-meta">{book.pages} pages</p>
+                    )}
+                    <div className="item-actions">
+                      <button
+                        className="btn btn-outline"
+                        onClick={() => handleEdit(book)}
+                      >
+                        ✏️ Edit
+                      </button>
                       <button
                         className="btn btn-delete"
                         onClick={() => handleDeleteBook(book._id)}

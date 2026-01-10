@@ -22,6 +22,7 @@ function CreateInterviewForm() {
   const [message, setMessage] = useState('')
   const [interviews, setInterviews] = useState([])
   const [showList, setShowList] = useState(false)
+  const [editingId, setEditingId] = useState(null)
 
   useEffect(() => {
     fetchInterviews()
@@ -59,6 +60,45 @@ function CreateInterviewForm() {
     }
   }
 
+  const resetForm = () => {
+    setFormData({
+      title: '',
+      publicationName: '',
+      publicationType: 'Interview',
+      description: '',
+      content: '',
+      featuredImage: '',
+      videoUrl: '',
+      videoEmbed: '',
+      externalLink: '',
+      publishedDate: '',
+      tags: '',
+      featured: false,
+    })
+    setPreview('')
+    setEditingId(null)
+  }
+
+  const handleEdit = (interview) => {
+    setFormData({
+      title: interview.title,
+      publicationName: interview.publicationName,
+      publicationType: interview.publicationType,
+      description: interview.description || '',
+      content: interview.content || '',
+      featuredImage: interview.featuredImage || '',
+      videoUrl: interview.videoUrl || '',
+      videoEmbed: interview.videoEmbed || '',
+      externalLink: interview.externalLink || '',
+      publishedDate: interview.publishedDate?.split('T')[0] || '',
+      tags: interview.tags ? interview.tags.join(', ') : '',
+      featured: interview.featured || false,
+    })
+    setPreview(interview.featuredImage || '')
+    setEditingId(interview._id)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -69,24 +109,18 @@ function CreateInterviewForm() {
         ...formData,
         tags: formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
       }
-      await interviewsAPI.create(submitData)
-      setMessage('✅ Interview created successfully!')
-      setFormData({
-        title: '',
-        publicationName: '',
-        publicationType: 'Interview',
-        description: '',
-        content: '',
-        featuredImage: '',
-        videoUrl: '',
-        videoEmbed: '',
-        externalLink: '',
-        publishedDate: '',
-        tags: '',
-        featured: false,
-      })
-      setPreview('')
+      
+      if (editingId) {
+        await interviewsAPI.update(editingId, submitData)
+        setMessage('✅ Interview updated successfully!')
+      } else {
+        await interviewsAPI.create(submitData)
+        setMessage('✅ Interview created successfully!')
+      }
+      
+      resetForm()
       fetchInterviews()
+      setTimeout(() => setMessage(''), 3000)
     } catch (error) {
       setMessage(`❌ Error: ${error.message}`)
     } finally {
@@ -109,8 +143,10 @@ function CreateInterviewForm() {
   return (
     <div className="form-section">
       <div className="form-container">
-        <h2>🎤 Add Interview/Media Appearance</h2>
-        <p className="form-description">Share interviews, podcasts, and media features</p>
+        <h2>{editingId ? '✏️ Edit Interview/Media Appearance' : '🎤 Add Interview/Media Appearance'}</h2>
+        <p className="form-description">
+          {editingId ? 'Update your interview details' : 'Share interviews, podcasts, and media features'}
+        </p>
         
         {message && <div className={`message ${message.includes('✅') ? 'success' : 'error'}`}>{message}</div>}
 
@@ -251,9 +287,16 @@ function CreateInterviewForm() {
             <label htmlFor="featured-interview">Mark as Featured ⭐</label>
           </div>
 
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Adding...' : '✨ Add Interview'}
-          </button>
+          <div className="form-actions">
+            <button type="submit" className="btn btn-primary" disabled={loading}>
+              {loading ? 'Saving...' : editingId ? '✏️ Update Interview' : '✨ Add Interview'}
+            </button>
+            {editingId && (
+              <button type="button" className="btn btn-secondary" onClick={resetForm} disabled={loading}>
+                Cancel Edit
+              </button>
+            )}
+          </div>
         </form>
       </div>
 
@@ -278,13 +321,24 @@ function CreateInterviewForm() {
                   )}
                   <h4>{interview.title}</h4>
                   <p className="item-meta">{interview.publicationName}</p>
-                  <p className="item-date">{new Date(interview.publishedDate).toLocaleDateString()}</p>
-                  <button
-                    className="btn btn-delete"
-                    onClick={() => handleDelete(interview._id)}
-                  >
-                    🗑️ Delete
-                  </button>
+                  <p className="item-date">
+                    {new Date(interview.publishedDate).toLocaleDateString()}
+                  </p>
+                  <p className="pub-mag">{interview.publicationType}</p>
+                  <div className="item-actions">
+                    <button
+                      className="btn btn-outline"
+                      onClick={() => handleEdit(interview)}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button
+                      className="btn btn-delete"
+                      onClick={() => handleDelete(interview._id)}
+                    >
+                      🗑️ Delete
+                    </button>
+                  </div>
                 </div>
               ))
             )}
