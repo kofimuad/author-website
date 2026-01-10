@@ -95,7 +95,7 @@ function CreatePublicationForm() {
     setTimeout(() => {
       const formSection = document.querySelector('.form-section')
       if (formSection) {
-        const offsetTop = formSection.offsetTop - 150
+        const offsetTop = formSection.offsetTop - 100
         window.scrollTo({ top: offsetTop, behavior: 'smooth' })
       }
     }, 0)
