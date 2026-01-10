@@ -60,6 +60,17 @@ function CreateInterviewForm() {
     }
   }
 
+  const handleRemoveMedia = () => {
+    setPreview('')
+    setFormData({
+      ...formData,
+      featuredImage: '',
+    })
+    // Reset file input
+    const fileInput = document.getElementById('interview-image')
+    if (fileInput) fileInput.value = ''
+  }
+
   const resetForm = () => {
     setFormData({
       title: '',
@@ -77,6 +88,8 @@ function CreateInterviewForm() {
     })
     setPreview('')
     setEditingId(null)
+    const fileInput = document.getElementById('interview-image')
+    if (fileInput) fileInput.value = ''
   }
 
   const handleEdit = (interview) => {
@@ -225,6 +238,14 @@ function CreateInterviewForm() {
             {preview && (
               <div className="image-preview">
                 <img src={preview} alt="Preview" />
+                <button 
+                  type="button"
+                  className="btn btn-delete"
+                  onClick={handleRemoveMedia}
+                  style={{ marginTop: '0.8rem', width: '100%' }}
+                >
+                  🗑️ Remove Image
+                </button>
               </div>
             )}
           </div>

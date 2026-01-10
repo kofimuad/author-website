@@ -54,6 +54,17 @@ function CreateBTSForm() {
     }
   }
 
+  const handleRemoveMedia = () => {
+    setPreview('')
+    setFormData({
+      ...formData,
+      featuredImage: '',
+    })
+    // Reset file input
+    const fileInput = document.getElementById('media-upload')
+    if (fileInput) fileInput.value = ''
+  }
+
   const resetForm = () => {
     setFormData({
       title: '',
@@ -65,6 +76,8 @@ function CreateBTSForm() {
     })
     setPreview('')
     setEditingId(null)
+    const fileInput = document.getElementById('media-upload')
+    if (fileInput) fileInput.value = ''
   }
 
   const handleEdit = (post) => {
@@ -164,7 +177,7 @@ function CreateBTSForm() {
           </div>
 
           <div className="form-group">
-            <label>Image or Video {editingId ? '' : '(Optional)'}</label>
+            <label>Image or Video (Optional)</label>
             <div className="image-upload">
               <input
                 type="file"
@@ -183,6 +196,14 @@ function CreateBTSForm() {
                 ) : (
                   <img src={preview} alt="Preview" />
                 )}
+                <button 
+                  type="button"
+                  className="btn btn-delete"
+                  onClick={handleRemoveMedia}
+                  style={{ marginTop: '0.8rem', width: '100%' }}
+                >
+                  🗑️ Remove Media
+                </button>
               </div>
             )}
           </div>

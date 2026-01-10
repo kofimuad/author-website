@@ -72,6 +72,17 @@ function CreateBookForm() {
     }
   }
 
+  const handleRemoveImage = () => {
+    setPreview('')
+    setFormData({
+      ...formData,
+      coverImage: '',
+    })
+    // Reset file input
+    const fileInput = document.getElementById('book-cover')
+    if (fileInput) fileInput.value = ''
+  }
+
   const resetForm = () => {
     setFormData({
       title: '',
@@ -86,6 +97,8 @@ function CreateBookForm() {
     })
     setPreview('')
     setEditingId(null)
+    const fileInput = document.getElementById('book-cover')
+    if (fileInput) fileInput.value = ''
   }
 
   const handleEdit = (book) => {
@@ -188,6 +201,14 @@ function CreateBookForm() {
             {preview && (
               <div className="image-preview">
                 <img src={preview} alt="Preview" />
+                <button 
+                  type="button"
+                  className="btn btn-delete"
+                  onClick={handleRemoveImage}
+                  style={{ marginTop: '0.8rem', width: '100%' }}
+                >
+                  🗑️ Remove Image
+                </button>
               </div>
             )}
           </div>
