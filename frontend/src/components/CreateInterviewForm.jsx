@@ -96,7 +96,14 @@ function CreateInterviewForm() {
     })
     setPreview(interview.featuredImage || '')
     setEditingId(interview._id)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    
+    // Scroll to form with smooth behavior
+    setTimeout(() => {
+      const formContainer = document.querySelector('.form-container')
+      if (formContainer) {
+        formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 0)
   }
 
   const handleSubmit = async (e) => {
